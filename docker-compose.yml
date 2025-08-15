@@ -8,8 +8,9 @@ services:
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
+      - ${HOME}/.local/share/pnpm/store:/pnpm-store
     working_dir: /home/node/app/
-    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm dev"
+    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install --store-dir /pnpm-store && pnpm dev"
     depends_on:
       - mongo
       # - postgres
